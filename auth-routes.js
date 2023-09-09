@@ -8,6 +8,23 @@ router.post('/enviar',(req,res) =>{
     res.send("Logado")
 })
 
+router.post('/criar', async (req,res) =>{
+    const nome = req.body.nome
+    const senha = req.body.senha
+
+    try {
+        const user = await User.create({
+            nome: title,
+            senha: senha,
+        });
+        console.log(user)
+
+        res.redirect('/')
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 router.get('/register',(req,res) => {
     res.render('register')
 })
