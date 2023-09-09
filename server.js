@@ -3,8 +3,13 @@ const authRoutes = require('./auth-routes')
 const chatRoutes = require('./chat-routes')
 const app = express()
 
+const User = require('./user')
+
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 
 const mongoose = require('mongoose')
 
@@ -14,35 +19,46 @@ mongoose.connect(keys.database.link)
 
 app.use(express.urlencoded({ extended: true }))
 
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-      User.findOne({ username: username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!user.verifyPassword(password)) { return done(null, false); }
-        return done(null, user);
-      });
-    }
-  ))
+app.use(cookieParser())
+app.use(session({
+    secret: 'your secret here',
+    resave: false,
+    saveUninitialized: true
+}))
 
-const loginSchema = new mongoose.Schema({
-    nome:{
-        type: String,
-        required: true
-    },
-    senha:{
-        type: String,
-        required: true
-    }
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
 })
 
-const User = mongoose.model('User', loginSchema)
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+      done(err, user);
+  });
+})
+
+passport.use(new LocalStrategy(
+{
+  usernameField: 'nome',
+  passwordField: 'senha'
+},
+    async (username, password, done) => {
+      const user = await User.findOne({nome: username})
+      if (!user) { return done(null, false) }
+      if (password === user.senha) {
+          return done(null, user)
+      } else {
+          return done(null, false)
+      } 
+    }
+))
 
 app.set('view engine','ejs')
 
 app.use(express.static('public'))
 
 app.use('/auth',authRoutes)
+
+app.use('/chat',chatRoutes)
 
 app.get('/',(req,res)=>{
     res.render('index')

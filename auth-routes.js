@@ -1,12 +1,17 @@
 const router = require('express').Router()
 
+const mongoose = require('mongoose')
+const User = require('./user')
+const passport = require('passport')
+
 router.get('/login',(req,res) => {
     res.render('login')
 })
 
-router.post('/enviar',(req,res) =>{
-    res.send("Logado")
-})
+router.post('/enviar', passport.authenticate('local', {
+    successRedirect: '/chat',
+    failureRedirect: '/auth/login'
+}))
 
 router.post('/criar', async (req,res) =>{
     const nome = req.body.nome
@@ -14,10 +19,9 @@ router.post('/criar', async (req,res) =>{
 
     try {
         const user = await User.create({
-            nome: title,
+            nome: nome,
             senha: senha,
         });
-        console.log(user)
 
         res.redirect('/')
     } catch (err) {
