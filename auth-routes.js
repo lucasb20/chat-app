@@ -8,10 +8,17 @@ router.get('/login',(req,res) => {
     res.render('login')
 })
 
-router.post('/enviar', passport.authenticate('local', {
-    successRedirect: '/chat',
-    failureRedirect: '/auth/login'
-}))
+router.post('/enviar', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) { return next(err) }
+        if (!user) { return res.redirect('/auth/login') }
+        req.logIn(user, function(err) {
+            if (err) { return next(err) }
+            req.session.user = user
+            return res.redirect('/chat')
+        })
+    })(req, res, next);
+})
 
 router.post('/criar', async (req,res) =>{
     const nome = req.body.nome

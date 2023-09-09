@@ -60,6 +60,11 @@ app.use('/auth',authRoutes)
 
 app.use('/chat',chatRoutes)
 
+app.use((req, res, next) => {
+  res.locals.user = req.session.user
+  next()
+})
+
 app.get('/',(req,res)=>{
     res.render('index')
 })
