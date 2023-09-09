@@ -39,37 +39,20 @@ main{
     justify-content: space-evenly;
 }
 
-main p{
-    padding: 20px;
-    font-size: 1.3em;
-    text-align: center;
+main *{
+    margin: 5px;
 }
 
-main ul{
-    list-style: none;
-}
-
-main ul li{
-    margin: 40px;
-}
-
-main a{
+main a, button{
     text-decoration: none;
     color: black;
     background-color: var(--cor1);
     padding: 10px;
     cursor: pointer;
     border: 1px solid black;
+    font-size: 1em;
 }
 
-main a:hover{
+main a:hover, button:hover{
     background-color: var(--cor4);
-}
-
-footer{
-    text-align: center;
-    font-size: 1.5em;
-    margin: 20px auto;
-    background-color: var(--cor5);
-    padding: 10px;
 }
