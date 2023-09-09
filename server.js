@@ -1,5 +1,6 @@
 const express = require('express')
 const authRoutes = require('./auth-routes')
+const chatRoutes = require('./chat-routes')
 const app = express()
 
 app.set('view engine','ejs')
