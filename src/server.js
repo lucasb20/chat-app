@@ -3,6 +3,16 @@ const authRoutes = require('./auth-routes')
 const chatRoutes = require('./chat-routes')
 const app = express()
 
+const http = require('http')
+const socketio = require('socket.io')
+
+const server = http.createServer(app)
+const io = socketio(server)
+
+io.on('connection',(socket) =>{
+  console.log('Novo usuário conectado');
+})
+
 const User = require('./user')
 
 const passport = require('passport')
