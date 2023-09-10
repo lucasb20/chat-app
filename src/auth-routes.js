@@ -15,6 +15,7 @@ router.post('/enviar', (req, res, next) => {
         req.logIn(user, function(err) {
             if (err) { return next(err) }
             req.session.user = user
+            console.log('Conta logada com sucesso.')
             return res.redirect('/chat')
         })
     })(req, res, next);
@@ -29,8 +30,10 @@ router.post('/criar', async (req,res) =>{
             nome: nome,
             senha: senha,
         });
+        
+        console.log('Conta criada com sucesso.')
 
-        res.redirect('/')
+        res.redirect('/chat')
     } catch (err) {
         console.log(err)
     }
@@ -41,7 +44,7 @@ router.get('/register',(req,res) => {
 })
 
 router.get('/recovery',(req,res) =>{
-    res.send('Blz, me diz aí teu email associado a tua conta e a gente conversa.')
+    res.send('Blz, me diz aí o email associado a tua conta e a gente conversa.')
 })
 
 router.get('/help',(req,res) =>{
