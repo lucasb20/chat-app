@@ -9,10 +9,6 @@ const socketio = require('socket.io')
 const server = http.createServer(app)
 const io = socketio(server)
 
-io.on('connection',(socket) =>{
-  console.log('Novo usuário conectado');
-})
-
 const User = require('./user')
 
 const passport = require('passport')
@@ -79,6 +75,27 @@ app.get('/',(req,res)=>{
     res.render('index')
 })
 
-app.listen(keys.PORT, () => {
+const users = {}
+
+io.on('connection',(socket) =>{
+  console.log('new User')
+  socket.emit('chat-message','Hello World')
+
+  socket.on('new-user', (name) =>{
+    users[socket.id] = name
+    socket.broadcast.emit('user-connected',name)
+  })
+
+  socket.on('send-chat-message', (message) => {
+    console.log(message)
+    socket.broadcast.emit('chat-message', message)
+  })
+})
+
+/* app.listen(keys.PORT, () => {
     console.log(`app now listening for requests on port ${keys.PORT}`)
+}) */
+
+server.listen(keys.PORT, () => {
+  console.log(`app now listening for requests on port ${keys.PORT}`)
 })

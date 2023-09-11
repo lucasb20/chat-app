@@ -65,13 +65,16 @@ footer{
 }
 
 .message-container{
-    
+    margin: 0px;
+    padding: 0px;   
 }
 
 .send-container{
-    
+    margin: 0px;
+    padding: 0px;   
 }
 
 .message-input{
-    
+    margin: 0px;
+    padding: 0px;   
 }

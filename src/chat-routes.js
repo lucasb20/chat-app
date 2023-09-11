@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const User = require('./user')
 
 router.get('/',(req,res)=>{
-    res.render('profile',{ user: req.session.user })
+    res.render('chat',{ user: req.session.user })
 })
 
 router.post('/conversa', async (req,res)=>{
