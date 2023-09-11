@@ -39,7 +39,7 @@ main{
 }
 
 main *{
-    margin: 5px;
+    margin: 3px;
 }
 
 main a, button{
@@ -64,17 +64,22 @@ footer{
     padding: 10px;
 }
 
-.message-container{
-    margin: 0px;
-    padding: 0px;   
+#message-container{
+    list-style: none;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.336);
+    height: 300px;
+    width: 40vw;
+    overflow-y: scroll;
+    word-wrap: break-word;
 }
 
-.send-container{
-    margin: 0px;
-    padding: 0px;   
+#send-container{
+    border: 1px solid rgba(0, 0, 0, 0.397);
+    padding: 20px;   
 }
 
-.message-input{
-    margin: 0px;
-    padding: 0px;   
+#message-input{
+    padding: 10px;
+    font-size: 1.5em;
 }

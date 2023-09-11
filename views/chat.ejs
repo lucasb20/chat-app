@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="css/style3.css">
 </head>
 <body>
-    <header><h1>Olá <%= user.nome %>.</h1></header>
+    <header><h1 id="username">Olá <%= user.nome %>.</h1></header>
 
     <main>
-        <div class="message-container">
-            <form id="send-conteiner">
+        <div>
+            <ul id="message-container">
+                
+            </ul>
+
+            <form id="send-container">
                 <input type="text" id="message-input">
                 <button type="submit" id="send-button">Enviar</button>
             </form>
@@ -26,7 +30,7 @@
         <p>Lucas Rocha 2023</p>
     </footer>
 
-    <script defer src="http:localhost:3000/socket.io/socket.io.js"></script>
-    <script defer src="js/client.js"></script>
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="/js/client.js"></script>
 </body>
 </html>
