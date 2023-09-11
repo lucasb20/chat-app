@@ -1,7 +1,7 @@
 # Raissa
 Um aplicativo de rede social feito em Nodejs.
 
-- É um aplicativo em que você loga com uma conta local e digita em um chat aberto. Por exemplo, você consegue apenas se registrar, se logar e entrar no chat público, com outros usuários que conseguiram logar. Em breve espero poder adicionar mais possibilidades.
+- É um aplicativo que abre um site e você loga com uma conta local, entrando em um chat aberto. Por enquanto, você consegue apenas se registrar, se logar e entrar no chat público com outros usuários que conseguiram logar. Em breve espero poder adicionar mais possibilidades.
 
 - O nome do aplicativo é Raissa porque é um nome que eu acho bonito. Algo semelhante a linguagem Julia, que não foi escolhido em homenagem a alguma desenvolvedora da linguagem, simplesmente acharam um bom nome para se usar.
 
