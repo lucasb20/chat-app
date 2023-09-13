@@ -33,7 +33,7 @@ router.post('/criar', async (req,res) =>{
         
         console.log('Conta criada com sucesso.')
 
-        res.redirect('/chat')
+        res.redirect('/auth/login')
     } catch (err) {
         console.log(err)
     }

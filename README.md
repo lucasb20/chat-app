@@ -18,7 +18,13 @@ Um aplicativo de rede social feito em Nodejs.
 
   -  Por fim, instale todas as dependências (comando: npm install) e acesse no navegador a porta que o servidor está ouvindo.
 
-* Fotos... Nesse estado do projeto, não vejo motivo para postar. Só tem uma tela de login/registrar com usuário e senha, e, após login bem sucedido, aparece um chat branco em que você pode digitar e outros usuários conectados consegue ver em tempo real e digitar também.
+- Algumas screenshots:
+    ![Tela inicial](other/Screenshot1.png)
+    ![Tela de login](other/Screenshot2.png)
+    ![Conversa no chat](other/Screenshot3.png)
+
+- Créditos:
+    favicon -> Programador icon by Icons8 - https://icons8.com/
 
 * Ideias a se considerar:
     - Talvez trocar esse nome, né?
