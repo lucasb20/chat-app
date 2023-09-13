@@ -18,13 +18,18 @@ Um aplicativo de rede social feito em Nodejs.
 
   -  Por fim, instale todas as dependências (comando: npm install) e acesse no navegador a porta que o servidor está ouvindo.
 
-- Algumas screenshots:
+* Algumas screenshots:
+    - Tela Inicial
     ![Tela inicial](other/Screenshot1.png)
+
+    - Tela de login
     ![Tela de login](other/Screenshot2.png)
+
+    - Conversa no chat
     ![Conversa no chat](other/Screenshot3.png)
 
-- Créditos:
-    favicon -> Programador icon by Icons8 - https://icons8.com/
+* Créditos:
+    - favicon -> Programador icon by Icons8 - https://icons8.com/
 
 * Ideias a se considerar:
     - Talvez trocar esse nome, né?
