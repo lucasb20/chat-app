@@ -44,11 +44,19 @@ router.get('/register',(req,res) => {
 })
 
 router.get('/recovery',(req,res) =>{
-    res.send('Blz, me diz aí o email associado a tua conta e a gente conversa.')
+    res.render('geral',{
+        pag:{
+        title: 'recovery',
+        text: 'Blz, me diz aí o email associado a tua conta e a gente conversa.'
+    }})
 })
 
 router.get('/help',(req,res) =>{
-    res.send('É aquela história: Se você precisar de mim, é mesmo que nada.')
+    res.render('geral',{
+        pag:{
+        title: 'help',
+        text: 'É aquela história: Se você precisar de mim, é o mesmo que nada.'
+    }})
 })
 
 module.exports = router

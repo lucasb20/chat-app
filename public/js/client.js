@@ -6,7 +6,7 @@ const messageInput = document.querySelector('#message-input')
 
 const username = (document.querySelector('#username').innerHTML).slice(4,-1)
 
-appendMessage('You joined.')
+appendMessage('You joined.','center')
 socket.emit('new-user', username)
 
 socket.on('chat-message', (data) => {
@@ -14,19 +14,20 @@ socket.on('chat-message', (data) => {
 })
 
 socket.on('user-connected', (name) => {
-    appendMessage(`${name} joined.`)
+    appendMessage(`${name} joined.`,'center')
 })
 
 messageForm.addEventListener('submit', (e) => {
     e.preventDefault()
     const message = `${username}: `+ messageInput.value
     socket.emit('send-chat-message',message)
-    appendMessage(message)
+    appendMessage(message,'right')
     messageInput.value = ''
 })
 
-function appendMessage(message){
+function appendMessage(message, options = 'left'){
     const messageElement = document.createElement('li')
     messageElement.innerText = message
+    messageElement.style.textAlign = options
     messageContainer.append(messageElement)
 }
