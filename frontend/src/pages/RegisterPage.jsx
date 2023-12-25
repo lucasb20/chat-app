@@ -1,13 +1,13 @@
 import React from "react";
-import { LoginForm } from "../components/LoginForm";
+import {RegisterForm} from "../components/RegisterForm"
 import "../assets/auth.css"
 
-export function LoginPage(){
+export function RegisterPage(){
     return(<>
         <header><h1>Digite suas credenciais:</h1></header>
 
         <main>
-            <LoginForm/>
+            <RegisterForm />
             <nav>
                 <a href="/">Voltar</a>
             </nav>
