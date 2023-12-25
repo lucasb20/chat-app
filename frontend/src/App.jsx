@@ -1,10 +1,8 @@
-import reactLogo from './assets/react.svg'
+import { IndexPage } from "./pages/indexPage"
 
 function App() {
   return (
-    <>
-      <h1>Vite + React</h1>
-    </>
+    <IndexPage/>
   )
 }
 
