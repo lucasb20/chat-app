@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/auth.css"
 
 export function GeralPage({text}){
     return(
