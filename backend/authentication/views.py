@@ -16,3 +16,15 @@ def register_user(request):
         serializer.save()
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+def token_user(request):
+    return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
+
+def refresh_user(request):
+    return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
+
+def verify_user(request):
+    return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
+
+def blacklist_user(request):
+    return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
