@@ -4,6 +4,10 @@ from rest_framework.permissions import AllowAny
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from authentication.serializers import UserSerializer
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from backend.settings import SECRET_KEY
+import jwt
 
 # Create your views here.
 
@@ -14,11 +18,29 @@ def register_user(request):
     serializer = UserSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
+        user = User.objects.get(username=data['username']).set_password(data['password'])
+        user.save()
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def token_user(request):
-    return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
+    data = JSONParser().parse(request)
+
+    check = ('username' in data) and ('password' in data)
+
+    if check:
+        username = data['username']
+        password = data['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            encoded_jwt = jwt.encode({'sub':user.pk}, SECRET_KEY, algorithm="HS256")
+            return Response({'access_token':encoded_jwt},status=status.HTTP_201_CREATED)
+        else:
+            return Response({'Message':'Usuário não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+
+    return Response({"Message":"Formato inválido."},status.HTTP_400_BAD_REQUEST)
 
 def refresh_user(request):
     return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
