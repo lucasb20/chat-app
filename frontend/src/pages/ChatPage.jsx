@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import "../assets/chat.css"
 import { ChatForm } from "../components/ChatForm";
 import { TokenContext } from "../contexts/AuthContext";
-import { valityToken } from "../services/APIService"
+import { verifyToken } from "../services/APIService"
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export function ChatPage(){
     const navegar = useNavigate()
 
     useEffect(() => {
-        valityToken(token)
+        verifyToken(token)
         .then(data => console.log(data))
         .catch(err => {
             console.log(err)

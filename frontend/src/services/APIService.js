@@ -13,13 +13,6 @@ export async function login(username, password){
     return response.data
 }
 
-export async function logout(refresh_token){
-    const response = await axios.post(`${API_URL}/auth/blacklist/`, {
-        refresh_token: refresh_token
-    })
-    return response.status
-}
-
 export async function register(username, password){
     const response = await axios.post(`${API_URL}/auth/register/`, {
         "username": username,
@@ -29,15 +22,8 @@ export async function register(username, password){
     return response.status
 }
 
-export async function refreshToken(refresh_token){
-    const response = await axios.post(`${API_URL}/auth/refresh/`, {
-        refresh_token: refresh_token
-    })
-    return response.data
-}
-
-export async function valityToken(refresh_token){
-    const response = await axios.post(`${API_URL}/auth/vality/`, {
+export async function verifyToken(refresh_token){
+    const response = await axios.post(`${API_URL}/auth/verify/`, {
         refresh_token: refresh_token
     })
     return response.data

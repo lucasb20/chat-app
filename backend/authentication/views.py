@@ -4,6 +4,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from authentication.serializers import UserSerializer
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from backend.settings import SECRET_KEY
@@ -43,11 +44,13 @@ def token_user(request):
 
     return Response({"Message":"Formato inválido."},status.HTTP_400_BAD_REQUEST)
 
-def refresh_user(request):
-    return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
-
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def verify_user(request):
-    return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
+    data = JSONParser().parse(request)
+    try:
+        data_decoded = jwt.decode(data['access_token'],SECRET_KEY,algorithms=["HS256",])
+    except jwt.exceptions.DecodeError as e:
+        return Response({'Message':str(e)}, status.HTTP_400_BAD_REQUEST)
 
-def blacklist_user(request):
-    return Response({"Message":"Recurso ainda não implementado."},status.HTTP_404_NOT_FOUND)
+    return Response({**data_decoded}, status.HTTP_202_ACCEPTED)
