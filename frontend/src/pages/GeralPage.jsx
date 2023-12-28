@@ -9,7 +9,7 @@ export function GeralPage({text}){
             <h1>Suporte</h1>
         </header>
 
-        <main>
+        <main className="index">
             <p>{text}</p>
 
             <nav>

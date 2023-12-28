@@ -7,7 +7,7 @@ export function RegisterPage(){
     return(<>
         <header><h1>Digite suas credenciais:</h1></header>
 
-        <main>
+        <main className="auth">
             <RegisterForm />
             <nav>
                 <Link to="/">Voltar</Link>

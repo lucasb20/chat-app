@@ -7,7 +7,7 @@ export function LoginPage(){
     return(<>
         <header><h1>Digite suas credenciais:</h1></header>
 
-        <main>
+        <main className="auth">
             <LoginForm/>
             <nav>
                 <Link to="/">Voltar</Link>

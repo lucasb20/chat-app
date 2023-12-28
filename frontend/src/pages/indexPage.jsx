@@ -7,7 +7,7 @@ export function IndexPage(){
     <>
     <header><h1>Bem vindo a Raissa.</h1></header>
     
-        <main>
+        <main className="index">
             <p>Inicie login para começar.</p>
             <ul>
                 <li><Link to="/auth/login">Login</Link></li>

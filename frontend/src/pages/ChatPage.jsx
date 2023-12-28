@@ -24,7 +24,7 @@ export function ChatPage(){
         <>
             <header><h1 id="username">Olá {username}.</h1></header>
 
-            <main>
+            <main className="chat">
                 <ChatForm/>
                 <nav>
                     <Link to="/">Voltar</Link>
