@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { register } from "../services/APIService";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function RegisterForm() {
     const [username, setUsername] = useState('')
     const [senha, setSenha] = useState('')
     const [senha2, setSenha2] = useState('')
+
+    const navegador = useNavigate()
 
     const handleSubmit = e => {
             e.preventDefault();
@@ -24,15 +26,12 @@ export function RegisterForm() {
                 .then(data => {
                     if(data===201){
                         alert("Registrado com sucesso.")
-                        Navigate('/auth/login')
-                    }
-                    else{
-                        alert("Usuário já existente.")
+                        navegador('/auth/login')
                     }
                 })
                 .catch(err => {
+                    alert(err)
                     console.log(err)
-                    alert("Erro.")
                 })
             }
     }

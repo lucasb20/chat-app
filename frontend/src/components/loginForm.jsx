@@ -14,17 +14,19 @@ export function LoginForm() {
     const handleSubmit = e => {
         e.preventDefault();
 
-        if (username === '' || senha === ''){
+        if (nome === '' || senha === ''){
             return alert('Não pode ter campos vazios.')
         }
 
-        login(username, senha)
+        login(nome, senha)
         .then(data => {
             setToken(data['access_token'])
             setUsername(nome)
             navigate('/chat')
         })
-        .catch(err => {console.log(err); return alert('Credenciais não encontradas.')})
+        .catch(err => {
+            alert(`Credenciais não encontradas. ${err}`)
+        })
     }
 
     return(
