@@ -4,3 +4,5 @@ markdown
 django-filter
 django-cors-headers
 pyjwt
+channels[daphne]
+channels_redis
