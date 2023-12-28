@@ -22,9 +22,13 @@ export async function register(username, password){
     return response.status
 }
 
-export async function verifyToken(refresh_token){
+export async function verifyToken(access_token){
+    if (access_token == null){
+        throw new Error(400)
+    }
+
     const response = await axios.post(`${API_URL}/auth/verify/`, {
-        refresh_token: refresh_token
+        "access_token": access_token
     })
-    return response.data
+    return response.status
 }

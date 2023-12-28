@@ -16,7 +16,6 @@ export function ChatPage(){
         .then(data => console.log(data))
         .catch(err => {
             console.log(err)
-            alert('Erro na autenticaçao.')
             navegar('/auth/login')
         })
     }, [])

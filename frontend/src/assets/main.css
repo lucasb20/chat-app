@@ -29,13 +29,11 @@ header h1{
 main{
     margin: auto;
     background-color: var(--cor3);
-    width: 400px;
+    width: 80vw;
     height: 400px;
     border: 1px solid rgba(0, 0, 0, 0.384);
-    border-radius: 5px;
     box-shadow: 2px 2px 2px var(--cor1);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
 }

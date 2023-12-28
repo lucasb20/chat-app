@@ -4,7 +4,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from authentication.serializers import UserSerializer
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from backend.settings import SECRET_KEY
@@ -51,6 +50,8 @@ def verify_user(request):
     try:
         data_decoded = jwt.decode(data['access_token'],SECRET_KEY,algorithms=["HS256",])
     except jwt.exceptions.DecodeError as e:
+        return Response({'Message':str(e)}, status.HTTP_400_BAD_REQUEST)
+    except KeyError as e:
         return Response({'Message':str(e)}, status.HTTP_400_BAD_REQUEST)
 
     return Response({**data_decoded}, status.HTTP_202_ACCEPTED)
