@@ -1,6 +1,7 @@
 import React from "react";
 import { LoginForm } from "../components/LoginForm";
 import "../assets/auth.css"
+import { Link } from "react-router-dom";
 
 export function LoginPage(){
     return(<>
@@ -9,7 +10,7 @@ export function LoginPage(){
         <main>
             <LoginForm/>
             <nav>
-                <a href="/">Voltar</a>
+                <Link to="/">Voltar</Link>
             </nav>
         </main>    
         </>

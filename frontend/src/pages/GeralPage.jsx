@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/auth.css"
+import { Link } from "react-router-dom"; 
 
 export function GeralPage({text}){
     return(
@@ -12,7 +13,7 @@ export function GeralPage({text}){
             <p>{text}</p>
 
             <nav>
-                <a href="/">Back</a>
+                <Link to="/">Voltar</Link>
             </nav>
         </main>
 

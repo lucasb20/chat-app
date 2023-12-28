@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { login } from "../services/APIService";
+import { TokenContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
-    const [username, setUsername] = useState('')
+    const [nome, setNome] = useState('')
     const [senha, setSenha] = useState('')
+
+    const {setToken, setUsername} = useContext(TokenContext)
+
+    const navigate = useNavigate()
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -13,7 +19,11 @@ export function LoginForm() {
         }
 
         login(username, senha)
-        .then(data => console.log(data))
+        .then(data => {
+            setToken(data['access_token'])
+            setUsername(nome)
+            navigate('/chat')
+        })
         .catch(err => {console.log(err); return alert('Credenciais não encontradas.')})
     }
 
@@ -21,8 +31,8 @@ export function LoginForm() {
         <form onSubmit={handleSubmit}>
             <section>
                 <label htmlFor="nome">Nome:</label>
-                <input type="text" id="nome" placeholder="Insira seu nome" value={username}
-                onChange={e => setUsername(e.target.value)}
+                <input type="text" id="nome" placeholder="Insira seu nome" value={nome}
+                onChange={e => setNome(e.target.value)}
                 />
             </section>
             <section>

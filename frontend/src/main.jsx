@@ -5,6 +5,8 @@ import { IndexPage } from './pages/IndexPage.jsx'
 import { LoginPage } from './pages/LoginPage.jsx'
 import { RegisterPage } from './pages/RegisterPage.jsx'
 import { GeralPage } from './pages/GeralPage.jsx'
+import TokenContextProvider from './contexts/AuthContext.jsx'
+import { ChatPage } from './pages/ChatPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,11 +28,17 @@ const router = createBrowserRouter([
   {
     path: "/auth/help",
     element: <GeralPage text={'É aquela história: Se você precisar de mim, é o mesmo que nada.'} />
+  },
+  {
+    path: "/chat",
+    element: <ChatPage />
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <TokenContextProvider>
+      <RouterProvider router={router} />
+    </TokenContextProvider>
   </React.StrictMode>,
 )

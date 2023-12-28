@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { register } from "../services/APIService";
+import { Navigate } from "react-router-dom";
 
 export function RegisterForm() {
     const [username, setUsername] = useState('')
@@ -20,8 +21,19 @@ export function RegisterForm() {
             }
             else{
                 register(username, senha)
-                .then(data => {return (data===201)?alert("Registrado com sucesso."):alert("Erro.")})
-                .catch(err => console.log(err))
+                .then(data => {
+                    if(data===201){
+                        alert("Registrado com sucesso.")
+                        Navigate('/auth/login')
+                    }
+                    else{
+                        alert("Usuário já existente.")
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                    alert("Erro.")
+                })
             }
     }
 
