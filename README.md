@@ -1,9 +1,9 @@
 # Raissa
-Um aplicativo de rede social feito em Nodejs.
+Um aplicativo de rede social feito em React e Django.
 
-* É um aplicativo que abre um site e você loga com uma conta local, entrando em um chat aberto. Você consegue apenas se registrar, se logar e entrar no chat público com outros usuários que conseguiram logar.
+* É um aplicativo que abre um site, você pode criar ou logar uma conta local, e entrar em um chat aberto. Você consegue apenas se registrar, se logar e entrar no chat público com outros usuários que conseguiram logar.
 
-* O nome do aplicativo é Raissa porque é um nome que eu acho bonito. Algo semelhante a linguagem Julia, que não foi escolhido em homenagem a alguma desenvolvedora da linguagem, simplesmente acharam um bom nome para se usar.
+* O nome do aplicativo é Raissa porque eu acho esse um nome bonito. Algo semelhante a linguagem Julia, que não foi escolhido em homenagem a alguma desenvolvedora da linguagem, simplesmente acharam um bom nome para se usar.
 
 * O aplicativo está desenvolvido com o frontend em React e consumindo uma API em Django.
 
