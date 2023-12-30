@@ -1,18 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 export function ChatForm(){
     const [message, setMessage] = useState('')
     
+    const [conectado, setConectado] = useState(false)
+
+    const [chatSocket, setChatSocket] = useState(null)
+
     const { username } = useContext(TokenContext)
-
-    const chatSocket = new WebSocket('ws://localhost:6379')
-
+    
     const messageContainer = document.querySelector('#message-container')
-
-    const navegador = useNavigate()
-
+    
     const appendMessage = (message, options = 'left') => {
         const messageElement = document.createElement('li')
         messageElement.innerText = message
@@ -20,29 +19,41 @@ export function ChatForm(){
         messageContainer.append(messageElement)
     }
 
-    chatSocket.onmessage = e => {
-        const data = JSON.parse(e.data);
-        console.log(data)
-        appendMessage(data["message"])
-    }
+    useEffect(()=>{
+        if(conectado === false){
+            const ws = new WebSocket(`ws://localhost:6379`)
+            
+            ws.onmessage = e => {
+                const data = JSON.parse(e.data)
+                appendMessage(`${data.message}`, 'left')
+            }
+            
+            ws.onclose = e => {
+                console.error('Chat socket closed unexpectedly');
+            }
+            
+            ws.onopen = e => {
+                console.log('Chat socket connected');
+            }
 
-    chatSocket.onclose = e => {
-        console.error('Chat socket closed unexpectedly')
-        navegador('/')
-    }
-
+            setChatSocket(ws)
+            setConectado(true)
+        }
+        
+    }, [])
+    
     const handleSubmit = e => {
         e.preventDefault()
 
         const messageInputDom = document.querySelector('#message-input');
 
         const message = messageInputDom.value
-        
-        chatSocket.send(JSON.stringify({
-            'message':message
-        }))
 
-        setMessage('')
+        if(message !== ''){
+            chatSocket.send(JSON.stringify({'message': message}))
+            setMessage('')
+        }
+
     }
 
     return(
