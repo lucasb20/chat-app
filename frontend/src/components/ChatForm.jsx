@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { TokenContext } from "../contexts/AuthContext";
+import { get_WS_server } from "../services/WSService";
 
 export function ChatForm(){
     const [message, setMessage] = useState('')
     
     const { username } = useContext(TokenContext)
 
-    const chatSocket = new WebSocket('ws://localhost:8000/ws/chat/')
+    const chatSocket = get_WS_server()
 
     const messageContainer = document.querySelector('#message-container')
 
