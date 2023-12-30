@@ -1,15 +1,17 @@
 import React, { useContext, useState } from "react";
 import { TokenContext } from "../contexts/AuthContext";
-import { get_WS_server } from "../services/WSService";
+import { useNavigate } from "react-router-dom";
 
 export function ChatForm(){
     const [message, setMessage] = useState('')
     
     const { username } = useContext(TokenContext)
 
-    const chatSocket = get_WS_server()
+    const chatSocket = new WebSocket('ws://localhost:6379')
 
     const messageContainer = document.querySelector('#message-container')
+
+    const navegador = useNavigate()
 
     const appendMessage = (message, options = 'left') => {
         const messageElement = document.createElement('li')
@@ -20,12 +22,13 @@ export function ChatForm(){
 
     chatSocket.onmessage = e => {
         const data = JSON.parse(e.data);
-        appendMessage(data.message)
+        console.log(data)
+        appendMessage(data["message"])
     }
 
     chatSocket.onclose = e => {
-        alert(String(e))
         console.error('Chat socket closed unexpectedly')
+        navegador('/')
     }
 
     const handleSubmit = e => {
@@ -36,7 +39,7 @@ export function ChatForm(){
         const message = messageInputDom.value
         
         chatSocket.send(JSON.stringify({
-            'message':`${username}: ${message}`
+            'message':message
         }))
 
         setMessage('')

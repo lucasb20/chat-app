@@ -12,12 +12,14 @@ wss.on("connection", ws =>{
     ws.on('error', console.error)
 
     ws.on('message', data => {
-        console.log(`received: ${data}`)
+        wss.clients.forEach((client) => {
+            if(client.readyState === WebSocket.OPEN){
+                client.send(JSON.stringify({"message":data}))
+            }
+        })
     })
 
     ws.on('close', () => {
-        console.log('Client desconectado.')
+        console.log('client desconectado.')
     })
-
-    ws.send('something')
 })
