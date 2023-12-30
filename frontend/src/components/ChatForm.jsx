@@ -4,9 +4,9 @@ import { TokenContext } from "../contexts/AuthContext";
 export function ChatForm(){
     const [message, setMessage] = useState('')
     
-    const [conectado, setConectado] = useState(false)
+    const refConectado = useRef(false)
 
-    const [chatSocket, setChatSocket] = useState(null)
+    const refSocket = useRef(null)
 
     const { username } = useContext(TokenContext)
     
@@ -20,33 +20,52 @@ export function ChatForm(){
     }
 
     useEffect(()=>{
-        if(conectado === false){
-            setConectado(true)
+        if(refConectado.current === false){
             
-            setChatSocket(new WebSocket(`ws://localhost:6379`))
+            refSocket.current = new WebSocket(`ws://localhost:6379`)
             
-            chatSocket.onmessage = e => {
+            refSocket.current.onmessage = e => {
                 const data = JSON.parse(e.data)
-                appendMessage(data.message)
+                let positionRef = 'left'
+                let textRef = ''
+                if(data.type === 'join'){
+                    positionRef = 'center'
+                }
+                else if(data.username === username){
+                    positionRef = 'right'
+                }
+
+                if(data.type === 'message'){
+                    textRef = `${data.username}: ${data.message}`
+                }
+                else{
+                    textRef = data.username===username?'You joined': `${data.username} joined`
+                }
+                appendMessage(textRef, positionRef)
             }
             
-            chatSocket.onclose = e => {
+            refSocket.onclose = e => {
                 console.error('Chat socket closed unexpectedly');
             }
             
-            chatSocket.onopen = e => {
+            refSocket.current.onopen = e => {
                 console.log('Chat socket connected');
+                refSocket.current.send(JSON.stringify({'type':'join','username': username}))
             }
-
         }
         
+        refConectado.current = true
     }, [])
     
     const handleSubmit = e => {
         e.preventDefault()
 
         if(message !== ''){
-            chatSocket.send(JSON.stringify({'message': message}))
+            refSocket.current.send(JSON.stringify({
+                'type': 'message',
+                'username': username,
+                'message': message
+            }))
             setMessage('')
         }
 

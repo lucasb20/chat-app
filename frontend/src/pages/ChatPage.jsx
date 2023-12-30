@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "../assets/chat.css"
 import { ChatForm } from "../components/ChatForm";
 import { TokenContext } from "../contexts/AuthContext";
@@ -11,17 +11,17 @@ export function ChatPage(){
 
     const navegar = useNavigate()
 
-    const [autenticado, setAutenticado] = useState(false)
+    const refAutenticado = useRef(false)
 
     useEffect(() => {
-        if (autenticado === false){
-            setAutenticado(true)
+        if (refAutenticado.current === false){
             verifyToken(token)
             .then(data => console.log(data))
             .catch(err => {
                 console.log(err)
                 navegar('/auth/login')
             })
+            refAutenticado.current = true
         }
     }, [])
 
