@@ -13,10 +13,10 @@ wss.on("connection", ws =>{
 
     ws.on('message', event => {
         const data = event.toString()
-        console.log(data)
+        const dataJson = JSON.parse(data)
         wss.clients.forEach((client) => {
             if(client.readyState === WebSocket.OPEN){
-                client.send(JSON.stringify(data))
+                client.send(JSON.stringify(dataJson))
             }
         })
     })

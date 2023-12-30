@@ -15,8 +15,9 @@ export function ChatPage(){
 
     useEffect(() => {
         if (autenticado === false){
+            setAutenticado(true)
             verifyToken(token)
-            .then(data => setAutenticado(true))
+            .then(data => console.log(data))
             .catch(err => {
                 console.log(err)
                 navegar('/auth/login')
