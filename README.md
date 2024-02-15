@@ -29,7 +29,8 @@ The name of the application is Raissa because I think that name is beautiful. So
 
 1. Enter the backend application folder
 2. Run `pip install -r requirements` command to install dependencies
-3. Run `python manage.py runserver` to run development mode
+3. Run `python manage.py makemigrations` to start migrations and `python manage.py migrate` to apply migrations to the database
+4. Run `python manage.py runserver` to run development mode
 
 **Screenshots**
 
