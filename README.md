@@ -1,34 +1,43 @@
 # Raissa
-Um aplicativo de rede social feito em React, Nodejs e Django.
+A chat application in React, Nodejs and Django.
 
-* É um aplicativo que abre um site, em que você pode ter uma conta local e entrar em um chat global. Você consegue se registrar, se logar e entrar no chat público com outros usuários que conseguiram logar.
+**Description**
 
-* O nome do aplicativo é Raissa porque eu acho esse um nome bonito. Algo semelhante a linguagem Julia, que não foi escolhido em homenagem a alguma desenvolvedora da linguagem, simplesmente acharam um bom nome para se usar.
+It's an application where you can authenticate and log into a public chat.
 
-* O aplicativo está desenvolvido com o frontend em React, consumindo uma API em Django e um servidor websocket em nodejs.
+The name of the application is Raissa because I think that name is beautiful. Something similar to what happened in the Julia language, which was not chosen in reference to any developer, they thought this was a good name to use.
 
-* Instruções para instalação:
-  - Para iniciar o projeto do frontend e do servidor WS, precisará do NPM e Node instalados.
+**System requirements**
 
-  - Para instalar todas as dependências do frontend e do websocket-server, basta entrar na pasta de cada um deles e executar o comando 'npm install'.
+* Python 3.10
+* Node.js 20.10
+* NPM 10.2
 
-  - Para instalar todas as dependências do backend, basta entrar na pasta dele e executar o comando 'pip install -r requirements.txt'.
+**Frontend application installation**
 
-  - Execute 'python manage.py runserver' para iniciar o modo de desenvolvimento do backend, e 'npm run dev' para inicar o modo de desenvolvimento do frontend e do websocket-server.
+1. Enter the frontend application folder
+2. Run `npm install` to install dependencies
+3. Run `npm run dev` to launch the application in development mode
 
-* Algumas screenshots:
-    - Tela Inicial
-    ![Tela inicial](other/Screenshot1.png)
+**WebSocket server installation**
 
-    - Tela de login
-    ![Tela de login](other/Screenshot2.png)
+1. Enter the websocket-server application folder
+2. Run `npm install` to install dependencies
+3. Run `npm run dev` to launch the application in development mode
 
-    - Conversa no chat
-    ![Conversa no chat](other/Screenshot3.png)
+**API installation**
 
-* Créditos:
-    - favicon -> Programador icon by Icons8 - https://icons8.com/
+1. Enter the backend application folder
+2. Run `pip install -r requirements` command to install dependencies
+3. Run `python manage.py runserver` to run development mode
 
-* Ideias a se considerar:
-    - Talvez trocar esse nome, né?
-    - Melhorar a programação do chat. Tem alguns problemas como quando há mensagens demais, cria um Scroll, e você tem que rolar para ver as mensagens anteriores, além do visual em si estar meio estranho.
+**Screenshots**
+
+Home Page
+![Home Screen](other/Screenshot1.png)
+
+Login Page
+![Login Page](other/Screenshot2.png)
+
+Chat Page
+![Chat Page](other/Screenshot3.png)
