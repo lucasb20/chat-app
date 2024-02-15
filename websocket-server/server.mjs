@@ -3,11 +3,11 @@ import WebSocket, { WebSocketServer } from "ws";
 const wss = new WebSocketServer({
     port: 6379
 }, () => {
-    console.log('Servidor iniciado e escutando na porta 6379.')
+    console.log('Server listening on port 6379.')
 })
 
 wss.on("connection", ws =>{
-    console.log('client conectado.')
+    console.log('client connected.')
 
     ws.on('error', console.error)
 
@@ -22,6 +22,6 @@ wss.on("connection", ws =>{
     })
 
     ws.on('close', () => {
-        console.log('client desconectado.')
+        console.log('client disconnected.')
     })
 })

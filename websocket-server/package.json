@@ -1,7 +1,7 @@
 {
   "name": "websocket-server",
   "version": "1.0.0",
-  "description": "Servidor em Nodejs para tratar requisições websocket.",
+  "description": "Nodejs server to handle websocket requests.",
   "main": "server.mjs",
   "scripts": {
     "dev": "node server.mjs"
