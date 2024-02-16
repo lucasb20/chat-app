@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate
 from backend.settings import SECRET_KEY
 import jwt
 from datetime import datetime, timedelta, timezone
+from authentication.models import Token
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -40,7 +42,11 @@ def token_user(request):
 def verify_user(request):
     data = JSONParser().parse(request)
     try:
-        data_decoded = jwt.decode(data['access_token'],SECRET_KEY,algorithms=["HS256",])
+        data_decoded = jwt.decode(data['access_token'],SECRET_KEY, options={"require": ["sub", "exp"]},algorithms=["HS256",])
+        user = User.objects.get(id=data_decoded["sub"])
+        token = Token.objects.get(user=user)
+        if token.refresh_token == data_decoded:
+            raise Exception("refresh_token not allowed")
     except Exception as e:
         return Response({'message':str(e)}, status.HTTP_400_BAD_REQUEST)
 
