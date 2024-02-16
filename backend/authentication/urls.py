@@ -6,4 +6,5 @@ urlpatterns = [
     path('verify/', views.verify_user),
     path('register/', views.register_user),
     path('revoke/', views.revoke_user),
+    path('refresh/', views.refresh_user),
 ]

@@ -48,7 +48,7 @@ def verify_user(request):
         user = User.objects.get(id=data_decoded["sub"])
         token = Token.objects.get(user=user)
         if token.refresh_token == data_decoded:
-            raise Exception("refresh_token not allowed")
+            raise Exception("Refresh_token not allowed.")
     except Exception as e:
         return Response({'message':str(e)}, status.HTTP_400_BAD_REQUEST)
 
@@ -56,5 +56,28 @@ def verify_user(request):
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
+def refresh_user(request):
+    data = JSONParser().parse(request)
+
+    try:
+        token = Token.objects.get(refresh_token=data["refresh_token"])
+    except Token.DoesNotExist as e:
+        return Response({'message':str(e)}, status.HTTP_400_BAD_REQUEST)
+    
+    encoded_jwt = jwt.encode({'sub':token.user.pk, "exp": datetime.now(tz=timezone.utc) + timedelta(minutes=5)}, SECRET_KEY, algorithm="HS256")
+
+    return Response({'access_token':encoded_jwt}, status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def revoke_user(request):
-    return Response({'message':'Not implemented.'}, status.HTTP_400_BAD_REQUEST)
+    data = JSONParser().parse(request)
+
+    try:
+        token = Token.objects.get(refresh_token=data["refresh_token"])
+        token.delete()
+        token.save()
+    except Exception as e:
+        return Response({'message':str(e)}, status.HTTP_400_BAD_REQUEST)
+    
+    return Response({'message':'Revoked token.'}, status.HTTP_200_OK)
