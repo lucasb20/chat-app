@@ -33,9 +33,11 @@ def token_user(request):
     if user is not None:
         encoded_jwt = jwt.encode({'sub':user.pk, "exp": datetime.now(tz=timezone.utc) + timedelta(minutes=5)}, SECRET_KEY, algorithm="HS256")
         encoded_jwt2 = jwt.encode({'sub':user.pk, "exp": datetime.now(tz=timezone.utc) + timedelta(days=1)}, SECRET_KEY, algorithm="HS256")
+        obj, created = Token.objects.get_or_create(user=user)
+        obj.refresh_token = encoded_jwt2
+        obj.save()
         return Response({'access_token':encoded_jwt, 'refresh_token': encoded_jwt2},status=status.HTTP_201_CREATED)
-    else:
-        return Response({'message':'Invalid user.'}, status=status.HTTP_404_NOT_FOUND)
+    return Response({'message':'Invalid user.'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
