@@ -7,6 +7,7 @@ from authentication.serializers import UserSerializer
 from django.contrib.auth import authenticate
 from backend.settings import SECRET_KEY
 import jwt
+from datetime import datetime, timedelta, timezone
 
 # Create your views here.
 
@@ -28,10 +29,11 @@ def token_user(request):
     password = data['password']
     user = authenticate(username=username, password=password)
     if user is not None:
-        encoded_jwt = jwt.encode({'sub':user.pk}, SECRET_KEY, algorithm="HS256")
-        return Response({'access_token':encoded_jwt},status=status.HTTP_201_CREATED)
+        encoded_jwt = jwt.encode({'sub':user.pk, "exp": datetime.now(tz=timezone.utc) + timedelta(minutes=5)}, SECRET_KEY, algorithm="HS256")
+        encoded_jwt2 = jwt.encode({'sub':user.pk, "exp": datetime.now(tz=timezone.utc) + timedelta(days=1)}, SECRET_KEY, algorithm="HS256")
+        return Response({'access_token':encoded_jwt, 'refresh_token': encoded_jwt2},status=status.HTTP_201_CREATED)
     else:
-        return Response({'Message':'Usuário não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'message':'Invalid user.'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -40,6 +42,11 @@ def verify_user(request):
     try:
         data_decoded = jwt.decode(data['access_token'],SECRET_KEY,algorithms=["HS256",])
     except Exception as e:
-        return Response({'Message':str(e)}, status.HTTP_400_BAD_REQUEST)
+        return Response({'message':str(e)}, status.HTTP_400_BAD_REQUEST)
 
     return Response({**data_decoded}, status.HTTP_202_ACCEPTED)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def revoke_user(request):
+    return Response({'message':'Not implemented.'}, status.HTTP_400_BAD_REQUEST)
