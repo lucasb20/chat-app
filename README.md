@@ -9,9 +9,10 @@ The name of the application is Raissa because I think that name is beautiful. So
 
 **System requirements**
 
-* Python 3.10
-* Node.js 20.10
-* NPM 10.2
+* Python
+* Node.js
+* NPM
+* PostgreSQL
 
 **Frontend application installation**
 
