@@ -2,9 +2,8 @@ from authentication import views
 from django.urls import path
 
 urlpatterns = [
-    path('token/', views.token_user),
-    path('verify/', views.verify_user),
+    path('token/', views.generate_token),
+    path('validate/', views.validate_token),
+    path('revoke/', views.revoke_token),
     path('register/', views.register_user),
-    path('revoke/', views.revoke_user),
-    path('refresh/', views.refresh_user),
 ]
