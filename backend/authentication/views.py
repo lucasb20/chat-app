@@ -40,20 +40,16 @@ def generate_token(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def validate_token(request):
-    data = JSONParser().parse(request)
-    serializer = AccessTokenSerializer(data=data)
-    if serializer.is_valid():
-        try:
-            token = serializer.validated_data["access_token"]
-            jwt.decode(token,SECRET_KEY, options={"require": ["sub", "exp"]},algorithms=["HS256",])
-        except Exception as e:
-            return Response({'message':str(e)}, status.HTTP_400_BAD_REQUEST)
+    try:
+        token = request.headers["Authorization"]
+        jwt.decode(token,SECRET_KEY, options={"require": ["sub", "exp"]},algorithms=["HS256",])
+    except Exception as e:
+        return Response({'message':str(e)}, status.HTTP_400_BAD_REQUEST)
 
-        if token in BLACKLIST:
-            return Response({'message':'Access denied.'}, status.HTTP_404_NOT_FOUND)
-        
-        return Response({'message':'Access accepted.'}, status.HTTP_202_ACCEPTED)
-    return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+    if token in BLACKLIST:
+        return Response({'message':'Access denied.'}, status.HTTP_404_NOT_FOUND)
+    
+    return Response({'message':'Access accepted.'}, status.HTTP_202_ACCEPTED)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
