@@ -19,7 +19,7 @@ def register_user(request):
     serializer = UserSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response({"message":"User created."},status=status.HTTP_201_CREATED)
     return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
