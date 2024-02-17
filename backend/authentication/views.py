@@ -5,6 +5,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from authentication.serializers import UserLoginSerializer, UserSerializer, AccessTokenSerializer
 from django.contrib.auth import authenticate
+from authentication.permissions import IsAuthenticated
 from backend.settings import SECRET_KEY
 import jwt
 from datetime import datetime, timedelta, timezone
@@ -36,8 +37,8 @@ def generate_token(request):
             return Response({'message':'Invalid user.'}, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def validate_token(request):
     data = JSONParser().parse(request)
     serializer = AccessTokenSerializer(data=data)
