@@ -22,8 +22,7 @@ export async function register({username, password} : UserData){
             password: password
         })
     })
-
-    return response.status
+    return response
 }
 
 export async function validateToken({access_token} : {access_token : string}){
