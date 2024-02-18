@@ -1,6 +1,24 @@
+import Link from "next/link";
+import style from "../../page.module.css"
 
 export default function Page(){
     return(
-        <p>Not implemented</p>
+        <>
+            <header>
+                <h1>Support</h1>
+            </header>
+
+            <main className={style.index}>
+                <p>It's that story: If you need me, it's the same as nothing.</p>
+
+                <nav>
+                    <Link href={"/"}>Back</Link>
+                </nav>
+            </main>
+
+            <footer>
+                <p>Lucas Rocha - @lucasb20</p>
+            </footer>
+        </>
     )
 }
