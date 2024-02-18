@@ -38,3 +38,7 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
+.auth *{
+    margin: 5px;
+}

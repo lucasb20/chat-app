@@ -1,6 +1,6 @@
-import LoginForm from "@/components/RegisterForm";
 import Link from "next/link";
 import style from "@/app/page.module.css"
+import LoginForm from "@/components/LoginForm";
 
 export default function Page(){
     return(

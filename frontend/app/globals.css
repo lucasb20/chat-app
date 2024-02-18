@@ -24,7 +24,7 @@ header h1{
     padding: 10px;
 }
 
-a{
+a, button{
     text-decoration: none;
     color: black;
     background-color: var(--cor1);
@@ -35,7 +35,7 @@ a{
     font-size: 1em;
 }
 
-a:hover{
+a:hover, button:hover{
     background-color: var(--cor4);
 }
 
