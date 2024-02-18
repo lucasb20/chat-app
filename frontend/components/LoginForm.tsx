@@ -2,23 +2,22 @@
 
 import { login } from "@/services/APIService"
 import { UserData } from "@/services/Interfaces"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 
 export default function LoginForm(){
     const [formData, setFormData] = useState<UserData>({ username: "", password: ""})
+    const router = useRouter()
 
     const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         login({username : formData.username, password : formData.password})
         .then(data => {
+            alert(data)
             //setToken(data['access_token'])
             //setUsername(nome)
-            redirect('/chat')
-        })
-        .catch(err => {
-            alert(err)
+            router.push('/chat')
         })
     }
 

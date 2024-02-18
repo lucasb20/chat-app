@@ -18,7 +18,7 @@ export default function RegisterForm(){
         else{
             register({username : formData.username, password : formData.password1})
             .then(data => {
-                alert(`${data.statusText}`)
+                alert(data.statusText)
                 if(data.status===201){
                     router.push("/auth/login")
                 }
