@@ -24,6 +24,21 @@ header h1{
     padding: 10px;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+    background-color: var(--cor1);
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+a:hover{
+    background-color: var(--cor4);
+}
+
 footer{
     text-align: center;
     font-size: 1.5em;

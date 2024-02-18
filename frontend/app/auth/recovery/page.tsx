@@ -15,10 +15,6 @@ export default function Page(){
                     <Link href={"/"}>Back</Link>
                 </nav>
             </main>
-
-            <footer>
-                <p>Lucas Rocha - @lucasb20</p>
-            </footer>
         </>
     )
 }
