@@ -1,14 +1,10 @@
 "use client"
 
+import { UserData } from "@/services/Interfaces"
 import { FormEvent, useState } from "react"
 
-interface LoginData{
-    username: string,
-    password: string
-}
-
 export default function LoginForm(){
-    const [formData, setFormData] = useState<LoginData>({ username: "", password: ""})
+    const [formData, setFormData] = useState<UserData>({ username: "", password: ""})
 
     const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()

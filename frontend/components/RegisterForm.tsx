@@ -1,12 +1,7 @@
 "use client"
 
+import { RegisterData } from "@/services/Interfaces"
 import { FormEvent, useState } from "react"
-
-interface RegisterData{
-    username: string,
-    password1: string,
-    password2: string
-}
 
 export default function RegisterForm(){
     const [formData, setFormData] = useState<RegisterData>({username : "", password1 : "", password2 : ""})
