@@ -1,6 +1,8 @@
 "use client"
 
+import { register } from "@/services/APIService"
 import { RegisterData } from "@/services/Interfaces"
+import { redirect } from "next/navigation"
 import { FormEvent, useState } from "react"
 
 export default function RegisterForm(){
@@ -8,25 +10,41 @@ export default function RegisterForm(){
 
     const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if( formData.password1 !== formData.password2 ){
+            return alert("Passwords don't match.")
+        }
+        else{
+            register({username : formData.username, password : formData.password1})
+            .then(data => {
+                if(data===201){
+                    alert("Successfully registered.")
+                    redirect("/auth/login")
+                }
+            })
+            .catch(err => {
+                alert(err)
+            })
+        }
     }
 
     return(
         <form onSubmit={handleSubmit}>
             <section>
                 <label htmlFor="username">Username:</label>
-                <input type="text" id="username" placeholder="Enter your username" value={formData.username}
+                <input type="text" id="username" placeholder="Enter your username" value={formData.username} required
                 onChange={e=>setFormData({...formData, username : e.target.value})}
                 />
             </section>
             <section>
                 <label htmlFor="password1">Password:</label>
-                <input type="password" id="password1" placeholder="Enter your password" value={formData.password1}
+                <input type="password" id="password1" placeholder="Enter your password" value={formData.password1} required
                 onChange={e=>setFormData({...formData, password1 : e.target.value})}
                 />
             </section>
             <section>
                 <label htmlFor="password2">Confirm password:</label>
-                <input type="password" id="password2" placeholder="Enter your password again" value={formData.password2}
+                <input type="password" id="password2" placeholder="Enter your password again" value={formData.password2} required
                 onChange={e=>setFormData({...formData, password2 : e.target.value})}
                 />
             </section>

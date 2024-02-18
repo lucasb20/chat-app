@@ -29,9 +29,9 @@ export async function register({username, password} : UserData){
 export async function validateToken({access_token} : {access_token : string}){
     const response = await fetch(`${API_URL}/auth/validate/`, {
         method : 'GET',
-        body : JSON.stringify({
-            access_token : access_token
-        })
+        headers : {
+            'Authorization' : access_token
+        }
     })
     
     return response.status
