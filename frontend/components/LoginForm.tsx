@@ -18,7 +18,7 @@ export default function LoginForm(){
         .then(data => {
             alert(data.message)
             if(context !== undefined){
-                context.setToken(data['access_token'])
+                context.setToken(data.access_token)
                 router.push('/chat')
             }
         })

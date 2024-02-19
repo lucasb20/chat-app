@@ -33,5 +33,5 @@ export async function validateToken({access_token} : {access_token : string}){
         }
     })
     
-    return response.status
+    return response.json()
 }
