@@ -1,23 +1,26 @@
 "use client"
 
 import { login } from "@/services/APIService"
+import { TokenContext } from "@/services/AuthContext"
 import { UserData } from "@/services/Interfaces"
 import { useRouter } from "next/navigation"
-import { FormEvent, useState } from "react"
+import { FormEvent, useContext, useState } from "react"
 
 export default function LoginForm(){
     const [formData, setFormData] = useState<UserData>({ username: "", password: ""})
     const router = useRouter()
+    const context = useContext(TokenContext)
 
     const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         login({username : formData.username, password : formData.password})
         .then(data => {
-            alert(data)
-            //setToken(data['access_token'])
-            //setUsername(nome)
-            router.push('/chat')
+            alert(data.message)
+            if(context !== undefined){
+                context.setToken(data['access_token'])
+                router.push('/chat')
+            }
         })
     }
 

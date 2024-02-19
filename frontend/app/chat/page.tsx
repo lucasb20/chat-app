@@ -7,7 +7,7 @@ export default function Page(){
             <header><h1>Connected as *username*</h1></header>
 
             <main>
-                <ChatForm/>
+                <ChatForm username={"lucasb20"} />
                 <nav>
                     <Link href="/">Back</Link>
                 </nav>

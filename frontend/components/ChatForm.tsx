@@ -2,10 +2,9 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react"
 
-export default function ChatForm(){
+export default function ChatForm({ username } : {username : string}){
     const messageContainer = useRef<HTMLUListElement>(null)
     const [message, setMessage] = useState<string>("")
-    const refConnected = useRef<boolean>(false)
     const refSocket = useRef<WebSocket | null>(null)
 
     const appendMessage = ({message, options = 'left'} : {message: string, options : string}) => {
@@ -18,8 +17,7 @@ export default function ChatForm(){
     }
 
     useEffect(()=>{
-        if(refConnected.current === false){
-            
+        if(refSocket.current === null){
             refSocket.current = new WebSocket(`ws://localhost:6379`)
             
             refSocket.current.onmessage = e => {
@@ -51,8 +49,6 @@ export default function ChatForm(){
                 refSocket.current?.send(JSON.stringify({'type':'join','username': username}))
             }
         }
-        
-        refConnected.current = true
     }, [])
 
     const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
@@ -75,7 +71,7 @@ export default function ChatForm(){
             </ul>
                 <form id="send-container" onSubmit={handleSubmit}>
                     <input type="text" id="message-input" value={message} onChange={e => setMessage(e.target.value)}/>
-                    <button type="submit" id="send-button">Enviar</button>
+                    <button type="submit" id="send-button">Send</button>
                 </form>
         </div>
     )
