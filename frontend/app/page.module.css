@@ -42,3 +42,43 @@
 .auth *{
     margin: 5px;
 }
+
+.chat{
+    margin: auto;
+    background-color: var(--cor3);
+    width: 80vw;
+    height: 65vh;
+    border: 1px solid rgba(0, 0, 0, 0.384);
+    box-shadow: 2px 2px 2px var(--cor1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.chat #message-container{
+    list-style: none;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.336);
+    height: calc(0.65 * 65vh);
+    width: 40vw;
+    overflow-y: scroll;
+    word-wrap: break-word;
+}
+
+.chat #message-container li{
+    font-size: 1em;
+}
+
+.chat #send-container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.397);
+    padding: 5px;
+}
+
+.chat #message-input{
+    padding: 10px;
+    font-size: 1.2em;
+}
