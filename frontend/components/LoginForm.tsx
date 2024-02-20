@@ -14,11 +14,20 @@ export default function LoginForm(){
     const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        let status = 0;
+
         login({username : formData.username, password : formData.password})
         .then(data => {
-            if(context !== undefined){
+            status = data.status
+            return data.json()
+        })
+        .then(data => {
+            if(context !== undefined && status == 201){
                 context.setToken(data.access_token)
                 router.push('/chat')
+            }
+            else{
+                alert(data.message)
             }
         })
     }

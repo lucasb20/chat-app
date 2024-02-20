@@ -11,7 +11,7 @@ export async function login({username, password} : UserData){
         })
     })
 
-    return response.json()
+    return response
 }
 
 export async function register({username, password} : UserData){
