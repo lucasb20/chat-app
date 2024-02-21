@@ -1,11 +1,11 @@
 # Raissa
-A chat application in React, Nodejs and Django.
+A chat application in Nextjs, Django and Nodejs.
 
 **Description**
 
-It's an application where you can authenticate and log into a public chat.
+It is an application where you can authenticate and log in to enter a public chat.
 
-The name of the application is Raissa because I think that name is beautiful. Something similar to what happened in the Julia language, which was not chosen in reference to any developer, they thought this was a good name to use.
+The name of the application is Raissa because I find this name beautiful. Similar to what happened with the Julia language, which was not chosen to honor a developer, they simply found it a good name to use.
 
 **System requirements**
 
