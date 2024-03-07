@@ -5,12 +5,13 @@ import sys
 
 
 def install_frontend():
-    subprocess.run(["npm", "install"], cwd="frontend", shell=True, check=True)
+    shell = os.name != 'posix'
+    subprocess.run(["npm", "install"], cwd="frontend", shell=shell, check=True)
 
 def install_backend():
     executable = sys.executable
     if os.name == 'posix':
-        raise NotImplementedError("Not implemented for this OS.")
+        venv_executable = "venv/bin/python"
     elif os.name == 'nt':
         venv_executable = "backend/venv/Scripts/python.exe"
 
@@ -27,7 +28,8 @@ PORT_DB=5432"""
         env_file.write(data)
 
 def install_websocket_server():
-    subprocess.run(["npm", "install"], cwd="websocket-server", shell=True, check=True)
+    shell = os.name != 'posix'
+    subprocess.run(["npm", "install"], cwd="websocket-server", shell=shell, check=True)
 
 
 if __name__ == "__main__":
