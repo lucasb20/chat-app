@@ -16,6 +16,15 @@ def install_backend():
     subprocess.run([executable, "-m", "venv", "venv"], cwd="../backend", check=True)
     subprocess.run([venv_executable, "-m", "pip", "install", "-r", "requirements.txt"], cwd="../backend", check=True)
 
+    data = """NAME_DB=name
+USER_DB=user
+PASSWORD_DB=password
+HOST_DB=localhost
+PORT_DB=5432"""
+
+    with open("../backend/.env", "w") as env_file:
+        env_file.write(data)
+
 def install_websocket_server():
     subprocess.run(["npm", "install"], cwd="../websocket-server", shell=True, check=True)
 
