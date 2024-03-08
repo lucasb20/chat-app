@@ -13,13 +13,32 @@ def enter_login_page(driver : WebDriver):
             a.click()
             break
 
+def enter_register_page(driver : WebDriver):
+    menu = driver.find_element(By.TAG_NAME, 'ul')
+    buttons = menu.find_elements(By.TAG_NAME, 'li')
+
+    for element in buttons:
+        a = element.find_element(By.TAG_NAME, 'a')
+        if a.text == "Register":
+            a.click()
+            break
+
 def login_user(driver : WebDriver, username, password):
     driver.implicitly_wait(5)
-    username_input = driver.find_element(By.ID, 'username')
-    password_input = driver.find_element(By.ID, 'password')
+    driver.find_element(By.ID, 'username').send_keys(username)
+    driver.find_element(By.ID, 'password').send_keys(password)
+    
+    buttons = driver.find_elements(By.TAG_NAME, 'button')
+    for button in buttons:
+        if button.text == "Submit":
+            button.click()
+            break
 
-    username_input.send_keys(username)
-    password_input.send_keys(password)
+def register_user(driver : WebDriver, username, password):
+    driver.implicitly_wait(5)
+    driver.find_element(By.ID, 'username').send_keys(username)
+    driver.find_element(By.ID, 'password1').send_keys(password)
+    driver.find_element(By.ID, 'password2').send_keys(password)
     
     buttons = driver.find_elements(By.TAG_NAME, 'button')
     for button in buttons:
