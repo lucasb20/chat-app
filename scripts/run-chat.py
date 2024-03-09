@@ -1,5 +1,6 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+import time
 
 APP_URL = "http://localhost:3000"
 
@@ -24,7 +25,6 @@ def enter_register_page(driver : WebDriver):
             break
 
 def login_user(driver : WebDriver, username, password):
-    driver.implicitly_wait(5)
     driver.find_element(By.ID, 'username').send_keys(username)
     driver.find_element(By.ID, 'password').send_keys(password)
     
@@ -35,7 +35,6 @@ def login_user(driver : WebDriver, username, password):
             break
 
 def register_user(driver : WebDriver, username, password):
-    driver.implicitly_wait(5)
     driver.find_element(By.ID, 'username').send_keys(username)
     driver.find_element(By.ID, 'password1').send_keys(password)
     driver.find_element(By.ID, 'password2').send_keys(password)
@@ -46,11 +45,20 @@ def register_user(driver : WebDriver, username, password):
             button.click()
             break
 
+def send_in_chat(driver : WebDriver, message):
+    driver.find_element(By.ID, 'message-input').send_keys(message)
+    driver.find_element(By.ID, 'send-button').click()
+
 if __name__ == "__main__":
     driver = WebDriver()
     driver.get(APP_URL)
 
     enter_login_page(driver)
+    time.sleep(10)
     login_user(driver, "lucasb20", "123")
+    time.sleep(10)
+    send_in_chat(driver, "Hi guys")
+    send_in_chat(driver, "How are you?")
+    time.sleep(5)
 
     driver.quit()
