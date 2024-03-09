@@ -42,6 +42,14 @@ PORT_DB=5432
 5. Run `python manage.py migrate` to apply migrations to the database
 6. Run `python manage.py runserver` to run development mode
 
+**Scripts**
+
+The custom scripts provided within this project were primarily developed to streamline the development process.
+
+These scripts may not be compatible with all systems and configurations, and they may encounter errors related to permissions, shell variations, or missing dependencies. Additionally, they may not handle cases where users do not have all necessary services installed.
+
+I do not recommend using any of these scripts.
+
 **Screenshots**
 
 Home Page
