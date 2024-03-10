@@ -52,15 +52,20 @@ def send_in_chat(driver : WebDriver, message):
 if __name__ == "__main__":
     driver1 = WebDriver()
     driver2 = WebDriver()
-    
-    driver1.get(APP_URL)
-    driver2.get(APP_URL)
 
+    driver1.get(APP_URL)
+    driver1.maximize_window()
+    driver1.save_screenshot("other/home_page.png")
     enter_login_page(driver1)
+
+    driver2.get(APP_URL)
+    driver2.maximize_window()
     enter_login_page(driver2)
 
     time.sleep(10)
 
+    driver2.save_screenshot("other/login_page.png")
+    
     login_user(driver1, "lucasb20", "123")
     login_user(driver2, "Livia", "123")
     
