@@ -7,11 +7,20 @@ export default function ChatForm({ username } : {username : string}){
     const [message, setMessage] = useState<string>("")
     const refSocket = useRef<WebSocket | null>(null)
 
-    const appendMessage = ({message, options = 'left'} : {message: string, options : string}) => {
+    const appendMessage = ({message, user} : {message: string, user : string}) => {
         if(messageContainer.current){
             const messageElement = document.createElement('li')
             messageElement.innerText = message
-            messageElement.style.textAlign = options
+            messageElement.style.textAlign = user === username?'right':'left'
+            messageContainer.current.append(messageElement)
+        }
+    }
+
+    const appendJoin = ({user} : {user : string}) => {
+        if(messageContainer.current){
+            const messageElement = document.createElement('li')
+            messageElement.innerText = user === username?'You joined':`${user} joined`
+            messageElement.style.textAlign = 'center'
             messageContainer.current.append(messageElement)
         }
     }
@@ -22,22 +31,11 @@ export default function ChatForm({ username } : {username : string}){
             
             refSocket.current.onmessage = e => {
                 const data = JSON.parse(e.data)
-                let positionRef = 'left'
-                let textRef = ''
                 if(data.type === 'join'){
-                    positionRef = 'center'
+                    appendJoin({user : data.username})
+                    return;
                 }
-                else if(data.username === username){
-                    positionRef = 'right'
-                }
-
-                if(data.type === 'message'){
-                    textRef = `${data.username}: ${data.message}`
-                }
-                else{
-                    textRef = data.username===username?'You joined': `${data.username} joined`
-                }
-                appendMessage({message : textRef, options : positionRef})
+                appendMessage({message : data.message, user : data.username})
             }
             
             refSocket.current.onclose = e => {
