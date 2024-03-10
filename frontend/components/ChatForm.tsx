@@ -9,9 +9,26 @@ export default function ChatForm({ username } : {username : string}){
 
     const appendMessage = ({message, user} : {message: string, user : string}) => {
         if(messageContainer.current){
+            const usernameElement = document.createElement('p')
+            usernameElement.innerText = user
+
+            const inputElement = document.createElement('p')
+            inputElement.innerText = message
+
+            const now = new Date()
+            const hours = now.getHours()
+            const minutes = now.getMinutes()
+            const hours_text = hours < 10 ? `0${hours}` : `${hours}`
+            const minutes_text = minutes < 10 ? `0${minutes}` : `${minutes}`
+            const timeElement = document.createElement('span')
+            timeElement.append(`${hours_text}:${minutes_text}`)
+
             const messageElement = document.createElement('li')
-            messageElement.innerText = message
+            messageElement.append(usernameElement)
+            messageElement.append(inputElement)
+            messageElement.append(timeElement)
             messageElement.style.textAlign = user === username?'right':'left'
+
             messageContainer.current.append(messageElement)
         }
     }
