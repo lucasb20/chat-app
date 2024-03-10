@@ -53,10 +53,10 @@ I do not recommend using any of these scripts.
 **Screenshots**
 
 Home Page
-![Home Screen](other/Screenshot1.png)
+![Home Screen](other/home_page.png)
 
 Login Page
-![Login Page](other/Screenshot2.png)
+![Login Page](other/login_page.png)
 
 Chat Page
 ![Chat Page](other/Screenshot3.png)
