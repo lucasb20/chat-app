@@ -30,13 +30,21 @@ a, button{
     background-color: var(--cor1);
     padding: 10px;
     cursor: pointer;
+    outline: none;
     border: 1px solid black;
     border-radius: 5px;
+    box-shadow: 0 9px #999;
     font-size: 1em;
 }
 
 a:hover, button:hover{
     background-color: var(--cor4);
+}
+
+a:active, button:active{
+    background-color: var(--cor4);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 footer{
