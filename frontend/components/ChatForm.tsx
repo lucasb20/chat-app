@@ -7,6 +7,13 @@ export default function ChatForm({ username } : {username : string}){
     const [message, setMessage] = useState<string>("")
     const refSocket = useRef<WebSocket | null>(null)
 
+    const scrollDown = () => {
+        messageContainer.current?.scrollTo({
+            top : Number(messageContainer.current.style.height),
+            behavior : "smooth"
+        })
+    }
+
     const appendMessage = ({message, user} : {message: string, user : string}) => {
         if(messageContainer.current){
             const usernameElement = document.createElement('p')
@@ -21,6 +28,8 @@ export default function ChatForm({ username } : {username : string}){
             messageElement.style.textAlign = user === username?'right':'left'
 
             messageContainer.current.append(messageElement)
+
+            scrollDown()
         }
     }
 
@@ -30,6 +39,8 @@ export default function ChatForm({ username } : {username : string}){
             messageElement.innerText = user === username?'You joined':`${user} joined`
             messageElement.style.textAlign = 'center'
             messageContainer.current.append(messageElement)
+
+            scrollDown()
         }
     }
 
