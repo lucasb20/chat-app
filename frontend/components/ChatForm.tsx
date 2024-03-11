@@ -27,7 +27,8 @@ export default function ChatForm({ username } : {username : string}){
         if(messageContainer.current){
             const usernameElement = document.createElement('p')
             usernameElement.innerText = user
-            usernameElement.style.fontSize = "0.8em"
+            usernameElement.style.fontStyle = 'italic'
+            usernameElement.style.opacity = '0.9'
 
             const inputElement = document.createElement('p')
             inputElement.innerText = message
