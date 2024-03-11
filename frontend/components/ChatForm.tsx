@@ -8,16 +8,26 @@ export default function ChatForm({ username } : {username : string}){
     const refSocket = useRef<WebSocket | null>(null)
 
     const scrollDown = () => {
-        messageContainer.current?.scrollTo({
-            top : Number(messageContainer.current.style.height),
-            behavior : "smooth"
-        })
+        if(messageContainer.current){
+            messageContainer.current.scrollTo({
+                top : messageContainer.current.scrollHeight,
+                behavior : "smooth"
+            })
+        }
     }
 
-    const appendMessage = ({message, user} : {message: string, user : string}) => {
+    const backButton = document.querySelector("a")
+    backButton?.addEventListener("click", () => {
+        if(refSocket.current){
+            refSocket.current.close()
+        }
+    })
+
+    const appendMessage = ({message, user} : {message : string, user : string}) => {
         if(messageContainer.current){
             const usernameElement = document.createElement('p')
             usernameElement.innerText = user
+            usernameElement.style.fontSize = "0.8em"
 
             const inputElement = document.createElement('p')
             inputElement.innerText = message
