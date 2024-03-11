@@ -59,4 +59,4 @@ Login Page
 ![Login Page](other/login_page.png)
 
 Chat Page
-![Chat Page](other/Screenshot3.png)
+![Chat Page](other/five_users.png)
