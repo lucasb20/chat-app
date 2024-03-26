@@ -8,3 +8,20 @@ services:
     build: backend/.
     ports:
       - 8000:8000
+    depends_on:
+      - db
+    environment:
+      NAME_DB: name
+      USER_DB: postgres
+      PASSWORD_DB: mypassword
+      HOST_DB: db
+      PORT_DB: 5432
+  db:
+    image: postgres:16-alpine
+    restart: always
+    shm_size: 128mb
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
