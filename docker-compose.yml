@@ -17,6 +17,10 @@ services:
       PASSWORD_DB: mypassword
       HOST_DB: db
       PORT_DB: 5432
+  websocket-server:
+    build: websocket-server/.
+    ports:
+      - 6379:6379
   db:
     image: postgres:16-alpine
     restart: always
