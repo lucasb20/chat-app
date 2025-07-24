@@ -1,0 +1,14 @@
+{
+  "name": "websocket-server",
+  "version": "1.0.0",
+  "description": "Nodejs server to handle websocket requests.",
+  "main": "server.mjs",
+  "scripts": {
+    "dev": "node server.mjs"
+  },
+  "author": "lucasb20",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^8.17.1"
+  }
+}

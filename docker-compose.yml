@@ -1,0 +1,34 @@
+
+services:
+  frontend:
+    build: frontend/.
+    ports:
+      - 3000:3000
+  backend:
+    build: backend/.
+    ports:
+      - 8000:8000
+    restart: always
+    depends_on:
+      - db
+    environment:
+      NAME_DB: my_db
+      USER_DB: postgres
+      PASSWORD_DB: mypassword
+      HOST_DB: db
+      PORT_DB: 5432
+  websocket-server:
+    build: websocket-server/.
+    ports:
+      - 6379:6379
+  db:
+    image: postgres:16-alpine
+    restart: always
+    shm_size: 128mb
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
