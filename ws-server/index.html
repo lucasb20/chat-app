@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Chat-App</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<header>
+			<h1>Welcome to Chat-app</h1>
+		</header>	
+		<main>
+			<div id="login-screen">
+				<form class="card">
+					<h2>Group Chat</h2>
+					<p style="margin-bottom: 20px; color: #aaa;">Enter your name to log in.</p>
+					<input type="text" id="username-input" placeholder="Your username...">
+					<button type"submit" onclick="connect(event)">Enter the Chat</button>
+				</form>
+			</div>
+			<div id="chat-screen">
+				<div id="messages"></div>
+				<form id="input-area" onsubmit="sendMessage(event)">
+					<input type="text" id="message-input" placeholder="Enter a message..." autocomplete="off">
+					<button type="submit" style="width: auto;">Send</button>
+				</form>
+			</div>
+		</main>
+		<script src="main.js"></script>
+	</body>
+</html>
